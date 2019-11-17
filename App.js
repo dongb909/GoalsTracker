@@ -1,28 +1,59 @@
 import React, {useState} from 'react';
-import {  Text, View , Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View , Button, TextInput, FlatList } from 'react-native';
+
 
 export default function App() {
-  // const [outputText, setOutputText] = useState('First text to appear on screen') //this is what state is first set as aka state: {} 
-  return (
-    <View style={{padding:30}}> 
+  const [submittedText, setText] = useState('');
+  const [goals, setGoals] = useState([]);
 
-      <View style={{flexDirection:'row', justifyContent:'space'}}>
+  const  inputHandler=(enteredText) => {
+    setText(enteredText); 
+  }
+  
+  const buttonHandler = () => {
+    setGoals(currentgoalsAutomatic => [...currentgoalsAutomatic, submittedText])
+  
+    // setGoals([]) //reset
+    // console.log(goals)
+  }
+  
+  return (
+    <View style={styles.wrapper}>  
+
+      <View style={styles.container}>
         <TextInput 
           placeholder='Course Goal'
-          style={{borderColor:'f0f', borderWidth:1, margin:10}} 
+          style={styles.text} 
+          onChangeText={inputHandler} value={submittedText}
           />
-        <Button title="ADD" />
+        <Button title="ADD" onPress={buttonHandler}/>
       </View>
-      <View>
-
-      </View>
-    </View>
+      <FlatList data={goals} renderItem={itemData => (  <View style={styles.eachitem}><Text>{itemData.item}</Text></View>)}>
+      </FlatList>
+    </View> 
   );
 }
 
-// const styles = StyleSheet.create({
-//   Wrapper = {
-//     padding:30
-//   }
+const styles = StyleSheet.create({
+  wrapper : {
+    padding:30
+  },
+  container: {
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center'
+  },
+  text: {
+    width:'80%',
+    borderColor:'black', 
+    borderWidth:1, 
+    marginVertical:10
+  },
+  eachitem: {
+    borderColor: 'black',
+    borderWidth: 1,
+    margin:10
+  }
 
-// });
+
+});
