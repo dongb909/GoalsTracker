@@ -25,13 +25,14 @@ export default function App() {
           placeholder='Course Goal'
           style={styles.text} 
           onChangeText={inputHandler} value={submittedText}
-          />
+          />  
         <Button title="ADD" onPress={buttonHandler}/>
       </View>
       <FlatList data={goals} renderItem={itemData => (  <View style={styles.eachitem}><Text>{itemData.item.value}</Text></View>)}>
       </FlatList>
     </View> 
-  );
+  ); 
+  
 }
 
 const styles = StyleSheet.create({
