@@ -11,7 +11,7 @@ export default function App() {
   }
   
   const buttonHandler = () => {
-    setGoals(currentgoalsAutomatic => [...currentgoalsAutomatic, submittedText])
+    setGoals(currentgoalsAutomatic => [...currentgoalsAutomatic, {key:Math.random().toString(), value:submittedText}])
   
     // setGoals([]) //reset
     // console.log(goals)
@@ -28,7 +28,7 @@ export default function App() {
           />
         <Button title="ADD" onPress={buttonHandler}/>
       </View>
-      <FlatList data={goals} renderItem={itemData => (  <View style={styles.eachitem}><Text>{itemData.item}</Text></View>)}>
+      <FlatList data={goals} renderItem={itemData => (  <View style={styles.eachitem}><Text>{itemData.item.value}</Text></View>)}>
       </FlatList>
     </View> 
   );
